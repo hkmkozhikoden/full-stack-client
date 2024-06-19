@@ -1,11 +1,11 @@
-import React,{useState, useContext} from 'react'
+import React,{UseState, useContext} from 'react'
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import {AuthContext} from '../helpers/AuthContext'
 
 function Login() {
-const [username, setUsername] = useState("");
-const [password, setPassword] = useState("");
+const [username, setUsername] = UseState("");
+const [password, setPassword] = UseState("");
 const {setAuthState} = useContext(AuthContext)
 let navigate =useNavigate();
 

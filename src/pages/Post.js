@@ -1,13 +1,13 @@
-import React, { useContext, useEffect,useState } from 'react';
+import React, { useContext, useEffect,UseState } from 'react';
 import {useNavigate, useParams,} from 'react-router-dom';
 import axios from 'axios';
 import {AuthContext} from '../helpers/AuthContext';
 
 function Post() {
     let {id} = useParams();
-    const [postObject, setPostObject] = useState({});
-    const [comments, setComments] = useState([]);
-    const [newComment, setNewComment] = useState("");
+    const [postObject, setPostObject] = UseState({});
+    const [comments, setComments] = UseState([]);
+    const [newComment, setNewComment] = UseState("");
     const {authState} = useContext(AuthContext);
 
     let navigate= useNavigate();
