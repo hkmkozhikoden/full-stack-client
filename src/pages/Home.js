@@ -1,9 +1,8 @@
 import React, { useEffect } from 'react';
 import { useState } from 'react';
-import axios from 'axios';
 import { useNavigate } from "react-router-dom";
+import axios from 'axios';
 import ThumbUpAltIcon from '@mui/icons-material/ThumbUpAlt';
-import { AuthContext } from '../helpers/AuthContext';
 
 function Home() {
   const [listOfPosts, setListOfPosts] = useState([]);
@@ -12,7 +11,7 @@ function Home() {
 
   useEffect(() => {
     if (!localStorage.getItem("accessToken")) {
-      navigate("./login");
+      navigate("/login");
     } else {
       axios.get("http://localhost:3001/posts", {
         headers: { accessToken: localStorage.getItem('accessToken') }
