@@ -67,7 +67,7 @@ function App() {
       if (response.data.error) {
         setAuthState({ ...authState, status: false });
       } else {
-        setAuthState({  
+        setAuthState({
           username: response.data.username,
           id: response.data.id,
           status: true,
@@ -78,7 +78,8 @@ function App() {
       console.error("Error fetching auth state:", error);
       setLoading(false);
     });
-  }, []);
+  }, [authState]); // Include authState in the dependency array
+  
 
   if (loading) {
     return <div>Loading...</div>;

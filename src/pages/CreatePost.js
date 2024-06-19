@@ -7,8 +7,8 @@ import { AuthContext } from "../helpers/AuthContext";
 
 function CreatePost() {
   const { authState } = useContext(AuthContext);
+  const navigate = useNavigate();
 
-  let navigate = useNavigate();
   const initialValues = {
     title: "",
     postText: "",
@@ -18,7 +18,8 @@ function CreatePost() {
     if (!localStorage.getItem("accessToken")) {
       navigate("/login");
     }
-  }, []);
+  }, [navigate]);
+
   const validationSchema = Yup.object().shape({
     title: Yup.string().required("You must input a Title!"),
     postText: Yup.string().required(),
@@ -45,7 +46,7 @@ function CreatePost() {
           <label>Title: </label>
           <ErrorMessage name="title" component="span" />
           <Field
-            autocomplete="off"
+            autoComplete="off"
             id="inputCreatePost"
             name="title"
             placeholder="(Ex. Title...)"
@@ -53,7 +54,7 @@ function CreatePost() {
           <label>Post: </label>
           <ErrorMessage name="postText" component="span" />
           <Field
-            autocomplete="off"
+            autoComplete="off"
             id="inputCreatePost"
             name="postText"
             placeholder="(Ex. Post...)"

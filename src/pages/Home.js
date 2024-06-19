@@ -1,36 +1,32 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { useState } from 'react';
-
 import axios from 'axios';
 import { useNavigate } from "react-router-dom";
 import ThumbUpAltIcon from '@mui/icons-material/ThumbUpAlt';
 import { AuthContext } from '../helpers/AuthContext';
 
-
 function Home() {
   const [listOfPosts, setListOfPosts] = useState([]);
   const [likedPosts, setLikedPosts] = useState([]);
-  const {authState} = useContext(AuthContext);
   const navigate = useNavigate();
 
   useEffect(() => {
     if (!localStorage.getItem("accessToken")) {
       navigate("./login");
+    } else {
+      axios.get("http://localhost:3001/posts", {
+        headers: { accessToken: localStorage.getItem('accessToken') }
+      }).then((response) => {
+        if (response.data) {
+          setListOfPosts(response.data.listOfPosts || []);
+          setLikedPosts((response.data.likedPosts || []).map((like) => like.PostId));
+          console.log(response.data.likedPosts);
+        }
+      }).catch(error => {
+        console.error("There was an error fetching the posts!", error);
+      });
     }
-    else {
-    axios.get("http://localhost:3001/posts", {
-      headers: { accessToken: localStorage.getItem('accessToken') }
-    }).then((response) => {
-      if (response.data) {
-        setListOfPosts(response.data.listOfPosts || []);
-        setLikedPosts((response.data.likedPosts || []).map((like) => like.PostId));
-        console.log(response.data.likedPosts);
-      }
-    }).catch(error => {
-      console.error("There was an error fetching the posts!", error);
-    });
-  }
-  }, []);
+  }, [navigate]);
 
   const likeApost = (postId) => {
     axios.post("http://localhost:3001/likes", { PostId: postId }, {
