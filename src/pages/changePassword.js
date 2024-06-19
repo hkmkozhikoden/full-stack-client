@@ -1,41 +1,52 @@
 import React, { useState } from 'react';
-import axios from 'axios'
-function changePassword() {
+import axios from 'axios';
+
+// Component name starts with an uppercase letter
+function ChangePassword() {
     const [oldPassword, setOldPassword] = useState("");
     const [newPassword, setNewPassword] = useState("");
-    const changePassword = () => {
-        axios
-          .put(
+
+    const handleChangePassword = () => {
+        axios.put(
             "http://localhost:3001/auth/changepassword",
             {
-              oldPassword: oldPassword,
-              newPassword: newPassword,
+                oldPassword: oldPassword,
+                newPassword: newPassword,
             },
             {
-              headers: {
-                accessToken: localStorage.getItem("accessToken"),
-              },
+                headers: {
+                    accessToken: localStorage.getItem("accessToken"),
+                },
             }
-          )
-          .then((response) => {
+        )
+        .then((response) => {
             if (response.data.error) {
-              alert(response.data.error);
+                alert(response.data.error);
             }
-          });
-      };
-  return (
-    <div>
-        <h2>change password</h2>
-      <input type='text' placeholder='old password...' 
-      onChange={(event) =>
-      {setOldPassword(event.target.value)}}></input>
-      <input type='text' placeholder='new password...'
-       onChange={(event) =>{setNewPassword(event.target.value)}}>
-       </input>
-      <button onClick={changePassword}>save change</button>
+        })
+        .catch((error) => {
+            console.error("Error changing password:", error);
+        });
+    };
 
-    </div>
-  )
+    return (
+        <div>
+            <h2>Change Password</h2>
+            <input
+                type='password'
+                placeholder='Old Password...'
+                value={oldPassword}
+                onChange={(event) => setOldPassword(event.target.value)}
+            />
+            <input
+                type='password'
+                placeholder='New Password...'
+                value={newPassword}
+                onChange={(event) => setNewPassword(event.target.value)}
+            />
+            <button onClick={handleChangePassword}>Save Change</button>
+        </div>
+    );
 }
 
-export default changePassword
+export default ChangePassword;
