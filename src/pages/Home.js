@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, UseState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from "react-router-dom";
 import ThumbUpAltIcon from '@mui/icons-material/ThumbUpAlt';
@@ -6,8 +6,8 @@ import { AuthContext } from '../helpers/AuthContext';
 
 
 function Home() {
-  const [listOfPosts, setListOfPosts] = UseState([]);
-  const [likedPosts, setLikedPosts] = UseState([]);
+  const [listOfPosts, setListOfPosts] = useState([]);
+  const [likedPosts, setLikedPosts] = useState([]);
   const {authState} = useContext(AuthContext);
   const navigate = useNavigate();
 

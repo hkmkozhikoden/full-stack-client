@@ -7,7 +7,7 @@ import Login from './pages/Login';
 import Registration from './pages/Registration';
 import { AuthContext } from './helpers/AuthContext';
 import PageNotFound from './pages/PageNotFound';
-import { UseState, useEffect, useContext } from 'react';
+import { useState, useEffect, useContext } from 'react';
 import axios from 'axios';
 import Profile from './pages/Profile';
 import ChangePassword from './pages/changePassword';
@@ -49,12 +49,12 @@ function Navbar() {
 }
 
 function App() {
-  const [authState, setAuthState] = UseState({
+  const [authState, setAuthState] = useState({
     username: "",
     id: 0,
     status: false,
   });
-  const [loading, setLoading] = UseState(true);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     axios.get("http://localhost:3001/auth/auth", {

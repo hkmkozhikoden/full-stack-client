@@ -1,8 +1,8 @@
-import React,{useImperativeHandleseState} from 'react'
+import React,{useState} from 'react'
 import axios from 'axios'
 function changePassword() {
-    const [oldPassword, setOldPassword] = UseState("");
-    const [newPassword, setNewPassword] = UseState("");
+    const [oldPassword, setOldPassword] = useState("");
+    const [newPassword, setNewPassword] = useState("");
     const changePassword = () => {
         axios
           .put(
