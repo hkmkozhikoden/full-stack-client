@@ -8,7 +8,8 @@ import Registration from './pages/Registration';
 import { AuthContext } from './helpers/AuthContext';
 import PageNotFound from './pages/PageNotFound';
 import { useEffect, useContext } from 'react';
-import React, { useState } from 'react';
+import { useState } from 'react';
+
 import axios from 'axios';
 import Profile from './pages/Profile';
 import ChangePassword from './pages/changePassword';
